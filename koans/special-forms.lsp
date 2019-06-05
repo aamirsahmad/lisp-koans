@@ -67,15 +67,15 @@
   (setf a 100)
   (let ((a 5)
         (b (* 10 a)))
-    (assert-equal b ___)))
+    (assert-equal b 1000)))
 
 (define-test test-let*-bindings-are-series
     "let* is like let, but successive bindings may use values of previous ones"
   (setf a 100)
   (let* ((a 5)
          (b (* 10 a)))
-    (assert-equal b ___))
-  (assert-equal a ___))
+    (assert-equal b 50))
+  (assert-equal a 100))
 
 
 (define-test write-your-own-let-statement
@@ -83,14 +83,14 @@
   (setf a 100)
   (setf b 23)
   (setf c 456)
-  (let ((a __)
-        (b __)
-        (c __))
+  (let ((b 200)
+        (c "Jellyfish"))
     (assert-equal a 100)
     (assert-equal b 200)
     (assert-equal c "Jellyfish"))
-  (let* ((a __)
-         ;; add more here
+  (let* ((a 121)
+         (b 200)
+         (c (+ a (/ b a)))
          )
     (assert-equal a 121)
     (assert-equal b 200)
@@ -106,18 +106,22 @@
                 (5 :five)
                 ;; t specifies default behavior
                 (t :unknown)))
-  (assert-equal ____ b)
+  (assert-equal :four b)
   "case can also check if a list of values contains
    the input"
   (setf c
         (case a (5 :five)
                 ((3 4) :three-or-four)))
-  (assert-equal ____ c))
+  (assert-equal :three-or-four c))
 
 (defun cartoon-dads (input)
     "you should be able to complete this case statement"
-  (case input (:this-one-doesnt-happen :fancy-cat)
-              (t :unknown)))
+    (case input
+      (:bart :homer)
+      (:stewie :peter)
+      (:stan :randy)
+      (:this-one-doesnt-happen :fancy-cat)
+      (t :unknown)))
 
 (define-test test-your-own-case-statement
     "fix this by completing the 'cartoon-dads' function above"
@@ -134,7 +138,7 @@
          (lastname (case name ("John" "Doe")
                               ("Max" "Mustermann")
                               (t "Anonymous"))))
-  (assert-equal ____ lastname)))
+  (assert-equal "Anonymous" lastname)))
 
 (define-test test-cond
     "cond is the general purpose form for checking multiple
@@ -144,4 +148,4 @@
         (cond ((> a 0) :positive)
               ((< a 0) :negative)
               (t :zero)))
-  (assert-equal ____ c))
+  (assert-equal :positive c))
